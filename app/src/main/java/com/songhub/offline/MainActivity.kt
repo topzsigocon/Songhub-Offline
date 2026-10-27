@@ -41,3 +41,6 @@ class MainActivity : AppCompatActivity() {
         return listOf("Lyrics parsing logic here")
     }
 }
+val intent = Intent(this, PlayerActivity::class.java)
+intent.putExtra("MIDI_PATH", selectedFile.absolutePath)
+startActivity(intent)
