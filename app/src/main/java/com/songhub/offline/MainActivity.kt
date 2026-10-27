@@ -1,46 +1,86 @@
 package com.songhub.offline
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.Settings
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var recyclerView: RecyclerView
     private val midiFiles = mutableListOf<File>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
-        // 1. Scan SD Card for MIDI
-        scanMidiFiles()
 
-        // 2. Setup Player
-        // Gagamit tayo ng android.media.MediaPlayer + custom lyric parser
-        // Ang lyrics ay nasa MIDI Meta Event type 0x05
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        checkAndRequestPermission()
     }
 
-    private fun scanMidiFiles() {
-        val sdCard = Environment.getExternalStorageDirectory()
-        val songhubDir = File(sdCard, "Songhub")
-        if (!songhubDir.exists()) songhubDir.mkdirs()
+    private fun checkAndRequestPermission() {
+        // Para sa Android 11, kailangan ng MANAGE_ALL_FILES
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+                startActivity(intent)
+            } else {
+                scanAndDisplayFiles()
+            }
+        } else {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 101)
+            } else {
+                scanAndDisplayFiles()
+            }
+        }
+    }
 
-        // Recursive scan
+    private fun scanAndDisplayFiles() {
+        midiFiles.clear()
+        val songhubDir = File(Environment.getExternalStorageDirectory(), "Songhub")
+        if (!songhubDir.exists()) {
+            songhubDir.mkdirs()
+            Toast.makeText(this, "Gumawa ng folder: /SDCard/Songhub/ - Lagay mo MIDI files mo dyan", Toast.LENGTH_LONG).show()
+        }
+
+        // Scan lahat ng .mid
         songhubDir.walkTopDown().forEach { file ->
-            if (file.extension.equals("mid", true) || file.extension.equals("midi", true)) {
+            if (file.isFile && (file.extension.equals("mid", true) || file.extension.equals("midi", true))) {
                 midiFiles.add(file)
             }
         }
-        // TODO: Display midiFiles sa RecyclerView
+
+        if (midiFiles.isEmpty()) {
+            Toast.makeText(this, "Walang MIDI file sa /Songhub/", Toast.LENGTH_SHORT).show()
+        }
+
+        // Ilagay sa RecyclerView
+        recyclerView.adapter = SongAdapter(midiFiles) { file ->
+            // Pag pinindot ang kanta, punta sa Player
+            val intent = Intent(this, PlayerActivity::class.java)
+            intent.putExtra("MIDI_PATH", file.absolutePath)
+            intent.putExtra("SONG_TITLE", file.name)
+            startActivity(intent)
+        }
     }
 
-    // Function para i-parse ang lyrics sa loob ng MIDI file
-    fun parseMidiLyrics(file: File): List<String> {
-        // Gagamit ng library: com.leff.midi
-        // Hanapin ang MidiEvent na Lyric (FF 05)
-        return listOf("Lyrics parsing logic here")
+    override fun onResume() {
+        super.onResume()
+        // I-scan ulit pag bumalik sa app
+        if (Environment.isExternalStorageManager()) {
+            scanAndDisplayFiles()
+        }
     }
 }
-val intent = Intent(this, PlayerActivity::class.java)
-intent.putExtra("MIDI_PATH", selectedFile.absolutePath)
-startActivity(intent)
