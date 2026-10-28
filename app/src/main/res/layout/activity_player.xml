@@ -1,1 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:background="#121212" android:gravity="center_horizontal" android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical" android:padding="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <TextView android:id="@+id/txtPlayerTitle" android:layout_height="wrap_content" android:layout_marginBottom="24dp" android:layout_width="wrap_content" android:text="Song Title" android:textColor="#FFFFFF" android:textSize="22sp" android:textStyle="bold"/>
+
+    <ScrollView android:background="#1E1E1E" android:layout_height="0dp" android:layout_weight="1" android:layout_width="match_parent" android:padding="16dp">
+
+        <TextView android:id="@+id/txtLyrics" android:layout_height="wrap_content" android:layout_width="match_parent" android:text="Lyrics will appear here..." android:textColor="#03DAC6" android:textSize="18sp" textAlignment="center"/>
+    </ScrollView>
+
+    <Button android:backgroundTint="#03DAC6" android:id="@+id/btnPlayPause" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:layout_width="match_parent" android:text="Play" android:textColor="#000000"/>
+
+</LinearLayout>
