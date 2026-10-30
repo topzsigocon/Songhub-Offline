@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Songhub Offline</string>
+
+    <!-- Tabs -->
+    <string name="tab_all">Lahat ng Kanta</string>
+    <string name="tab_favorites">Favorites</string>
+    <string name="tab_playlists">Playlists</string>
+
+    <!-- Main -->
+    <string name="search_hint">Hanapin ang kanta o song code…</string>
+    <string name="scanning">Nag-i-scan ng SD Card…</string>
+    <string name="song_count">%d kanta</string>
+    <string name="playlist_count">%d playlist</string>
+    <string name="empty_songs">Walang nahanap na MIDI file.\n\nIlagay ang mga .mid / .kar file sa SD Card:\n/Songhub/MIDI/\n\no pumili ng folder sa ibaba.</string>
+    <string name="empty_search">Walang tugma sa hinahanap mo.</string>
+    <string name="empty_favorites">Wala pang favorite.\nI-tap ang ☆ sa tabi ng kanta.</string>
+    <string name="permission_text">Kailangan ng access sa storage para mabasa ang mga MIDI file sa SD Card.\n\nSa Android 11: i-ON ang \"Allow access to manage all files\".</string>
+    <string name="permission_button">Payagan ang Access</string>
+    <string name="folder_added">Idinagdag: %s</string>
+    <string name="about_text">Songhub Offline Edition v1.0\n\n100% offline MIDI karaoke player.\nWalang internet, walang ads, walang tracking.\n\nNaglalagay ng kanta: SD Card/Songhub/MIDI/\nSupported: .mid .midi .kar .rmi\nLyrics: FF 05 (Lyric) at .KAR (Text events)</string>
+
+    <!-- Menu -->
+    <string name="menu_rescan">I-scan ulit</string>
+    <string name="menu_pick_folder">Pumili ng Folder</string>
+    <string name="menu_manage_folders">Mga Folder</string>
+    <string name="menu_scan_whole">I-scan ang buong SD Card</string>
+    <string name="menu_about">About</string>
+    <string name="no_folders">Walang Songhub folder at walang piniling folder.\n\nGumawa ng folder na \"Songhub/MIDI\" sa SD Card, o pumili ng folder.</string>
+    <string name="auto_folder_info">Auto-detected na Songhub folder ito. Laging sina-scan.</string>
+    <string name="remove_folder_q">Alisin ang folder na ito sa scan?\n\n%s</string>
+    <string name="remove">Alisin</string>
+    <string name="add_folder">Magdagdag</string>
+
+    <!-- Song menu -->
+    <string name="add_favorite">Idagdag sa Favorites</string>
+    <string name="remove_favorite">Alisin sa Favorites</string>
+    <string name="add_to_playlist">Idagdag sa Playlist</string>
+    <string name="details">Detalye ng File</string>
+    <string name="added_favorite">Naidagdag sa Favorites</string>
+    <string name="removed_favorite">Inalis sa Favorites</string>
+
+    <!-- Playlists -->
+    <string name="new_playlist">+ Bagong Playlist</string>
+    <string name="playlist_name">Pangalan ng playlist</string>
+    <string name="create">Gumawa</string>
+    <string name="playlist_created">Nagawa ang playlist: %s</string>
+    <string name="playlist_exists">May playlist na may ganyang pangalan (o blangko).</string>
+    <string name="added_to">Naidagdag sa %s</string>
+    <string name="already_in">Nasa %s na ito</string>
+    <string name="remove_from_playlist">Alisin sa playlist</string>
+    <string name="rename">Palitan ang pangalan</string>
+    <string name="delete_playlist">Burahin ang playlist</string>
+    <string name="delete_playlist_q">Burahin ang playlist na \"%s\"? (Hindi mabubura ang mga MIDI file.)</string>
+    <string name="play_all">Patugtugin Lahat</string>
+    <string name="empty_playlist">Walang laman ang playlist.\nSa song list, i-tap ang ⋮ → Idagdag sa Playlist.</string>
+
+    <!-- Player -->
+    <string name="key_label">KEY %s</string>
+    <string name="tempo_label">TEMPO %d%%</string>
+    <string name="no_lyrics">♪ Walang built-in lyrics ang MIDI file na ito ♪</string>
+    <string name="cannot_read">Hindi mabasa ang file</string>
+    <string name="play_error">Error: %s</string>
+    <string name="key_hint">I-tap ang label para i-reset</string>
+
+    <!-- Folder picker -->
+    <string name="picker_title">Pumili ng Folder</string>
+    <string name="picker_choose_storage">Piliin ang storage</string>
+    <string name="picker_hint">Piliin ang SD Card o Internal Storage, tapos pumasok sa folder ng mga kanta.</string>
+    <string name="picker_info">%1$d folder • %2$d MIDI file dito</string>
+    <string name="select_folder">Piliin ang Folder na Ito</string>
+    <string name="cancel">Kanselahin</string>
+</resources>
